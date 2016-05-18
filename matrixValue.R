@@ -27,10 +27,15 @@ if (!require("viridis")) {
 library(tools) # unless already loaded, comes with base R
 
 
-matrixValue <- function(filePath, a, b, stepSize)
+matrixValue <- function(filePath)
 {
+  ## Assign the values of a, b and stepsize
+  a = -0.00868;
+  b = 0.011169;
+  stepSize = 0.01;
+  
   ## Read .csv file
-  fileData <- read.csv(filePath)
+  fileData <- read.csv(filePath, header = FALSE) # Reading csv file with no headers
   fileName <- file_path_sans_ext(basename(filePath)) # Gets the name of the file without extension
   dirPath <- dirname(filePath) # Get the path to the directory
   
@@ -39,7 +44,9 @@ matrixValue <- function(filePath, a, b, stepSize)
   
   ## Find the number of rows and columns in the matrix
   numberOfRows <- nrow(dataMatrix)
+  print(numberOfRows)
   numberOfColumns <- ncol(dataMatrix)
+  print(numberOfColumns)
   
   ## Creates an empty matrix of the same dimensions
   newDataMatrix = matrix(nrow = numberOfRows, ncol = numberOfColumns)
@@ -55,7 +62,8 @@ matrixValue <- function(filePath, a, b, stepSize)
     for (j in 1:numberOfColumns)
       # for each column
     {
-      newDataMatrix[i,j] = (dataMatrix[i,j] - (a * value) - (b * newRowStepSize)) # compute values for the new matrix
+      print(dataMatrix[i,j])
+      newDataMatrix[i,j] = (dataMatrix[i,j] - (a * value) - (b * newRowStepSize)); # compute values for the new matrix
       value = value + stepSize;
     }
     newRowStepSize = newRowStepSize + stepSize;
