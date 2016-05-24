@@ -44,9 +44,7 @@ matrixValue <- function(filePath)
   
   ## Find the number of rows and columns in the matrix
   numberOfRows <- nrow(dataMatrix)
-  print(numberOfRows)
   numberOfColumns <- ncol(dataMatrix)
-  print(numberOfColumns)
   
   ## Creates an empty matrix of the same dimensions
   newDataMatrix = matrix(nrow = numberOfRows, ncol = numberOfColumns)
