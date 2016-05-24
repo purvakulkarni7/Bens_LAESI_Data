@@ -47,7 +47,7 @@ missingValueImputation <- function(filePath)
   }
   
   ## Generate file name and path where the new matrix wll be written
-  outputFilePath = paste(dirPath, "/", fileName,"Modified.csv", sep = "") # Note: Use forward or backward slash based on OS
+  outputFilePath = paste(dirPath, "/", fileName,"Imputed.csv", sep = "") # Note: Use forward or backward slash based on OS
   
   ## Write the matrix to the file
   write.table(newDataMatrix, file = outputFilePath, sep = ",", row.names = FALSE, col.names = FALSE)
