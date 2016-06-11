@@ -12,6 +12,14 @@
 
 library(tools) # unless already loaded, comes with base R
 
+#' Title
+#'
+#' @param filePath 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 multipleMissingValueImputation <- function(filePath)
 {
   ## Read .csv file
@@ -40,44 +48,37 @@ multipleMissingValueImputation <- function(filePath)
     {
       if (dataMatrix[i,j] == -10) # For single cell missing value
       {
-#         if (dataMatrix[i,j + 1] != -10)
-#         {
-#           # compute missing data by taking the mean of the neighbouring column cells
-#           newDataMatrix[i,j] = (dataMatrix[i,j - 1] + dataMatrix[i,j + 1]) /2; 
-#         }
-#         else
-#         {
-          k = j;
-          while (k > 0)
-          {
-            if (dataMatrix[i,k + incrementValue] == -10)
-            {
-              missingValueCount = missingValueCount + 1; # missing value count increases by 1
-              incrementValue = incrementValue + 1;
-            }
-            else
-            {
-              break;
-            }
-          }
-          cat("Incremenet Value: ", incrementValue, "\n")
-          cat("Total consecutive missing values: ", missingValueCount, "at i and j", i, ",", j, "\n")
-#        }
-        
-      }
-        else
+       # cat("Missing values: ", missingValueCount, "at (i,j) ---> ", i, ",", j, "\n")
+        while (j <= numberOfColumns)
         {
-          newDataMatrix[i,j] = dataMatrix[i,j]; # value remains unchanged for non-missing values
+          if (dataMatrix[i,j + incrementValue] == -10)
+          {
+            missingValueCount = missingValueCount + 1; # missing value count increases by 1
+            incrementValue = incrementValue + 1;
+            cat("Missing values: ", missingValueCount, "at (i,j) ---> ", i, ",", j, "\n")
+            next;
+          }
+          else
+          {
+           # cat("Total consecutive missing values: ", missingValueCount, "at (i,j) ---> ", i, ",", j, "\n")
+            break;
+          }
         }
-      j = j + incrementValue;
+      }
+      else
+      {
+        newDataMatrix[i,j] = dataMatrix[i,j]; # value remains unchanged for non-missing values
+      }
+      #  j = j + incrementValue;
       missingValueCount = 1;
       incrementValue = 1;
     }
   }
-    
-    ## Generate file name and path where the new matrix wll be written
-    outputFilePath = paste(dirPath, "/", fileName,"Imputed.csv", sep = "") # Note: Use forward or backward slash based on OS
-    
-    ## Write the matrix to the file
-    write.table(newDataMatrix, file = outputFilePath, sep = ",", row.names = FALSE, col.names = FALSE)
-  }
+  
+  ## Generate file name and path where the new matrix wll be written
+  outputFilePath = paste(dirPath, "/", fileName,"Imputed.csv", sep = "") 
+  # Note: Use forward or backward slash based on OS
+  
+  ## Write the matrix to the file
+  write.table(newDataMatrix, file = outputFilePath, sep = ",", row.names = FALSE, col.names = FALSE)
+}
