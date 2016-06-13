@@ -24,7 +24,7 @@ multipleMissingValueImputation <- function(filePath)
 {
   ## Read .csv file
   fileData <-
-    read.csv(filePath, header = FALSE) # Reading csv file with no headers
+    read.xlsx(filePath, 1, header = FALSE, sep = ",") # Reading csv file with no headers
   fileName <-
     file_path_sans_ext(basename(filePath)) # Gets the name of the file without extension
   dirPath <- dirname(filePath) # Get the path to the directory
@@ -39,48 +39,49 @@ multipleMissingValueImputation <- function(filePath)
   ## Creates an empty matrix of the same dimensions
   newDataMatrix = matrix(nrow = numberOfRows, ncol = numberOfColumns)
   
-  ## missing value counter
-  missingValueCount = 0;
-  incrementValue = 1;
-  
   ## Access each value of the dataMatrix, check if it -10
   for (i in 1:numberOfRows)  # for each row
   {
-    for (j in 1:numberOfColumns) # for each column
+    missingValueList = which(dataMatrix[i,] == -10);
+    consecutiveBreaks = which(diff(missingValueList) != 1);
+    print(missingValueList)
+    print(consecutiveBreaks)
+    
+    j=0;
+    
+    for(k in 1:length(consecutiveBreaks))
     {
-      k = j;
-      if (dataMatrix[i,j] == -10)  # For single cell missing value
+      if(k == 1)
       {
-        cat("value of j ABOVE HERE is: ", j, "\n")
-        cat(
-          "I got a single missing value at (",i,",",j,". Is there a consecutive missing value?", "\n"
-        )
-        for (k in j:numberOfColumns)
-        {
-          if (dataMatrix[i,k + incrementValue] == -10)
-          {
-            cat("Yes there is.", "\n")
-            missingValueCount = missingValueCount + 1; # missing value count increases by 1
-            incrementValue = incrementValue + 1;
-          }
-          else
-          {
-            cat("No there is no consecutive value.","\n")
-            break;
-          }
-        }
-        cat("Mising values here: ", missingValueCount, "\n")
-        next;
+        cat(consecutiveBreaks[k], " missing value at: (",i,",",missingValueList[j+k],")","\n");
       }
       else
       {
-        newDataMatrix[i,j] = dataMatrix[i,j]; # value remains unchanged for non-missing values
+        cat("Value of k: ", k, "\n");
+        cat(abs(consecutiveBreaks[k]-consecutiveBreaks[k-1]), " missing values starting from: (",i,",",missingValueList[j],")","\n");
+        
       }
-      missingValueCount = 0;
-      incrementValue = 1;
-      next;
+      j=j+1;
     }
   }
+    
+#     for(k in 1:(length(missingValueList)-1))
+#     {
+#       if(abs(missingValueList[k] - missingValueList[k+1]) > 1) #not consecutive
+#       {
+#         j = missingValueList[k];
+#         cat("Single missing value at: (",i,",",j,")","\n");
+#       }
+#       else #consecutive values
+#       {
+#         j = missingValueList[k];
+#         cat("Consecutive values at: (",i,",",j,") and (",i,",",j+1,")","\n");
+#       }
+#     }
+#       j = missingValueList[length(missingValueList)];
+#       cat("Single missing value at: (",i,",",j,")","\n");
+#  }
+
   
   ## Generate file name and path where the new matrix wll be written
   outputFilePath = paste(dirPath, "/", fileName,"Imputed.csv", sep = "")
