@@ -8,125 +8,86 @@
 
 ## Date 10 June 2016
 ## Author: Purva Kulkarni
-## Time: 13:35
 
 library(tools) # unless already loaded, comes with base R
 
-#' Title
-#'
-#' @param filePath
-#'
-#' @return
-#' @export
-#'
-#' @examples
 multipleMissingValueImputation <- function(filePath)
 {
   ## Read .csv file
-  fileData <- read.xlsx(filePath, 1, header = FALSE) # Reading csv file with no headers
+  fileData <-read.csv(filePath, header = FALSE) # Reading csv file with no headers
   fileName <- file_path_sans_ext(basename(filePath)) # Gets the name of the file without extension
   dirPath <- dirname(filePath) # Get the path to the directory
   
   ## Convert the .csv file to matrix class
-  dataMatrix <- data.matrix(fileData)
-  
-  ## Find the number of rows and columns in the matrix
-  numberOfRows <- nrow(dataMatrix)
-  numberOfColumns <- ncol(dataMatrix)
-  
-  ## Creates an empty matrix of the same dimensions
-  newDataMatrix = matrix(nrow = numberOfRows, ncol = numberOfColumns)
+  mdata <- data.matrix(fileData)
   
   ## Access each value of the dataMatrix, check if it -10
-  #   for (i in 1:numberOfRows)  # for each row
-  #   {
-  #     missingValueList = which(dataMatrix[i,] == -10);
-  #     consecutiveBreaks = which(diff(missingValueList) != 1);
-  #     print(missingValueList)
-  #     print(consecutiveBreaks)
-  #     
-  #     j=0;
-  #     
-  #     for(k in 1:length(consecutiveBreaks))
-  #     {
-  #       if(k == 1)
-  #       {
-  #         cat(consecutiveBreaks[k], " missing value at: (",i,",",missingValueList[j+k],")","\n");
-  #       }
-  #       else
-  #       {
-  #         cat("Value of k: ", k, "\n");
-  #         cat(abs(consecutiveBreaks[k]-consecutiveBreaks[k-1]), " missing values starting from: (",i,",",missingValueList[j],")","\n");
-  #         
-  #       }
-  #       j=j+1;
-  #     }
-  #   }
+  val = 1;
+  counter = 1;
+  temp = matrix();
   
-  #     for(k in 1:(length(missingValueList)-1))
-  #     {
-  #       if(abs(missingValueList[k] - missingValueList[k+1]) > 1) #not consecutive
-  #       {
-  #         j = missingValueList[k];
-  #         cat("Single missing value at: (",i,",",j,")","\n");
-  #       }
-  #       else #consecutive values
-  #       {
-  #         j = missingValueList[k];
-  #         cat("Consecutive values at: (",i,",",j,") and (",i,",",j+1,")","\n");
-  #       }
-  #     }
-  #       j = missingValueList[length(missingValueList)];
-  #       cat("Single missing value at: (",i,",",j,")","\n");
-  #  }
-  
-  ## Access each value of the dataMatrix, check if it -10
-  for (i in 1:numberOfRows) # for each row
+  for (i in 1:nrow(mdata)) # loop for rows
   {
-    for (j in 1:numberOfColumns)  # for each column
+    for (j in 1:ncol(mdata)) # loop for columns in a single row
     {
-      if(dataMatrix[i,j] == -10 & j < numberOfColumns)
+      if (mdata[i,j] == -10) # Find if a cell value is -10
       {
-        if(dataMatrix[i,j+1] != -10)
+        while (j <= ncol(mdata))
         {
-          # compute missing data by taking the mean of the neighbouring column cells
-          newDataMatrix[i,j] = (dataMatrix[i,j-1] + dataMatrix[i,j+1])/2;
-        }
-        else
-        {
-          k = j+1;
-          while(k <= numberOfColumns-1)
+          if (mdata[i,j + val] == -10)
           {
-            print("I am in while");
-            if(dataMatrix[i,k] == -10)
-            {
-              k= k+1;
-              next;
-            }
-            else
-            {
-              cat("Next number at coordinate: ", dataMatrix[i,k], "\n");
-              newDataMatrix[i,j+1] = (dataMatrix[i,j-1] + dataMatrix[i,k])/2;
-              break;
-            }
+            counter = counter + 1; # counter to keep a track of the number of -10 values
+            val = val + 1;
+            next;                    
+          }
+          else
+          {
+            break;
+          }
+        }
+        
+        if (counter == 1) #If there is only a single -10 value
+        {
+          temp <- t(as.matrix(mdata[i, (j - 1):(j + 1)]))
+         # cat("\n This is with counter 1 \n")
+          print(temp)
+          cat("\n matrix: temp-1", temp[,1],"temp-2", temp[,3],"\n");
+          to.avg <- c(temp[,1], temp[,3]);
+          avg<-mean(to.avg) # Take the mean of the neighbouring cells
+          mdata[i,j] = avg;
+        }
+        else # If there are consecutive -10 values
+        {
+          temp <- t(as.matrix(mdata[i,(j - 1):(j + counter)]))
+          cat("\n This is with multiple count \n")
+          cat(counter,"consecutive values were found, processing accordingly \n")
+          print(temp);
+          
+          for (k in 0:(counter-1)) # Loop to mean in a consecutive manner
+          {
+            cat("\n K is ",(k+1), "and array is",length(temp),"long \n")
+            to.avg <- c(temp[,(k+1)], temp[,length(temp)]);
+            cat("averaging", temp[,(k+1)],"and", temp[,length(temp)]);
+            avg<-mean(to.avg)
+            cat("\n average =",avg);
+            temp[,(k+2)] = avg; 
+            mdata[i,j+k]=avg
           }
         }
       }
-      else if(dataMatrix[i,j] == -10 & j == numberOfColumns)
-      {
-        newDataMatrix[i,j] = dataMatrix[i,j-1];
-      }
       else
       {
-        newDataMatrix[i,j] = dataMatrix[i,j]; # value remains unchanged for non-missing values
+        mdata[i,j] = mdata[i,j]; # Value remians unchanged if it is not -10
       }
+      val = 1;
+      counter = 1;
     }
   }
   
   ## Generate file name and path where the new matrix wll be written
-  outputFilePath = paste(dirPath, "/", fileName,"Imputed.csv", sep = "")
+  outputFilePath = paste(dirPath, "/", fileName,"Imputed.csv", sep = "") 
   # Note: Use forward or backward slash based on OS
   
   ## Write the matrix to the file
-  write.table(newDataMatrix, file = outputFilePath, sep = ",", row.names = FALSE, col.names = FALSE)
+  write.table(mdata, file = outputFilePath, sep = ",", row.names = FALSE, col.names = FALSE)
 }
