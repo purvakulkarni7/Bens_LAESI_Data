@@ -21,22 +21,28 @@ multipleMissingValueImputation <- function(filePath)
   ## Convert the .csv file to matrix class
   mdata <- data.matrix(fileData)
   
-  ## Access each value of the dataMatrix, check if it -10
+  ## Counters initialized
   val = 1;
   counter = 1;
   temp = matrix();
   
-  for (i in 1:nrow(mdata)) # loop for rows
+  for (i in 1:nrow(mdata)) # Loop for traversing rows
   {
-    for (j in 1:ncol(mdata)) # loop for columns in a single row
+    for (j in 1:ncol(mdata)) # Loop for traversing columns
     {
-      if (mdata[i,j] == -10) # Find if a cell value is -10
+      if (class(mdata[i,j]) != "numeric") # Check if the cell value os numeric
+      {
+        mdata[i,j] = as.numeric(as.vector(mdata[i,j])); # Convert to numeric if of any other type
+      }  
+      
+      ## Access each value of the dataMatrix, check if it -10
+      if (mdata[i,j] == -10)
       {
         while (j <= ncol(mdata))
         {
-          if (mdata[i,j + val] == -10)
+          if (mdata[i,j + val] == -10) # Counters for missing value
           {
-            counter = counter + 1; # counter to keep a track of the number of -10 values
+            counter = counter + 1;
             val = val + 1;
             next;                    
           }
@@ -46,38 +52,28 @@ multipleMissingValueImputation <- function(filePath)
           }
         }
         
-        if (counter == 1) #If there is only a single -10 value
+        if (counter == 1) # When there is a single missing value
         {
-          temp <- t(as.matrix(mdata[i, (j - 1):(j + 1)]))
-         # cat("\n This is with counter 1 \n")
-          print(temp)
-          cat("\n matrix: temp-1", temp[,1],"temp-2", temp[,3],"\n");
+          temp <- t(as.matrix(mdata[i, (j - 1):(j + 1)])); # Store the missing value and its neighbours in a temp matrix
           to.avg <- c(temp[,1], temp[,3]);
-          avg<-mean(to.avg) # Take the mean of the neighbouring cells
-          mdata[i,j] = avg;
+          avg<-mean(to.avg); # Take an average 
+          mdata[i,j] = avg; # Substitute average in missing value cell
         }
-        else # If there are consecutive -10 values
+        else
         {
-          temp <- t(as.matrix(mdata[i,(j - 1):(j + counter)]))
-          cat("\n This is with multiple count \n")
-          cat(counter,"consecutive values were found, processing accordingly \n")
-          print(temp);
-          
-          for (k in 0:(counter-1)) # Loop to mean in a consecutive manner
+          temp <- t(as.matrix(mdata[i,(j - 1):(j + counter)]));
+          for (k in 0:(counter-1)) # Loop for consecutive missing values
           {
-            cat("\n K is ",(k+1), "and array is",length(temp),"long \n")
             to.avg <- c(temp[,(k+1)], temp[,length(temp)]);
-            cat("averaging", temp[,(k+1)],"and", temp[,length(temp)]);
             avg<-mean(to.avg)
-            cat("\n average =",avg);
-            temp[,(k+2)] = avg; 
-            mdata[i,j+k]=avg
+            temp[,(k+2)] = avg; # perform averaging in a consecutive manner
+            mdata[i,j+k]=avg; 
           }
         }
       }
       else
       {
-        mdata[i,j] = mdata[i,j]; # Value remians unchanged if it is not -10
+        mdata[i,j] = as.numeric(as.vector(mdata[i,j])); # Value remains intact if not -10
       }
       val = 1;
       counter = 1;
