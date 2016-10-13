@@ -6,6 +6,10 @@
 
 #######################################################################################################
 
+# Install Cardinal if not installed
+# source("https://bioconductor.org/biocLite.R")
+# biocLite("Cardinal")
+
 library(Cardinal)
 library(viridis)
 
