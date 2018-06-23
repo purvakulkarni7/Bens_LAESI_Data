@@ -40,7 +40,7 @@ Enter the number of replicates on the plate for a single acquisition(integer):
 **2.  180418_POS_Cotton_Leaf_1**
 
   - [File](LAESI-MSI-Scripts-B_Bartels.et.al/180418_POS_Cotton_Leaf_1/Analog_List.txt) raw analog signal
-  - File containing corrected analog signal
+  - [File](LAESI-MSI-Scripts-B_Bartels.et.al/180418_POS_Cotton_Leaf_1/Corrected_Analog_List.txt) containing corrected analog signal
   - [File](LAESI-MSI-Scripts-B_Bartels.et.al/180418_POS_Cotton_Leaf_1/TIC_List.txt) containing TIC signal extracted based on the corrected analog signal
    - mzXML file generated from the Waters .RAW file
    - nRow = 11, nCol = 11
