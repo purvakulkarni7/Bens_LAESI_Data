@@ -17,6 +17,18 @@ y = 0.0092x - 0.0047
    - mzXML file generated from the Waters .RAW file
    - nRow = 11, nCol = 11
  
+ Run the `RAW_to_ImzML.R` script to generate the imzML file
+ ````
+ > RAW_to_ImZML()
+Enter sample name (without spaces, example: HylemonellaMono): 180418_NEG_Cotton_Leaf_1
+Enter path for analog data file (*.txt): P:\Personal\Personal_Scientific\Ben_LAESI_Data_4_June_2018\180418_NEG_Cotton_Leaf_1\Corrected_Analog_List.txt
+Enter path for TIC data file (*.txt): P:\Personal\Personal_Scientific\Ben_LAESI_Data_4_June_2018\180418_NEG_Cotton_Leaf_1\TIC_List.txt
+Enter path for mzXML data file (*.mzXML): P:\Personal\Personal_Scientific\Ben_LAESI_Data_4_June_2018\180418_NEG_Cotton_Leaf_1\180418_NEG_Cotton_Leaf_1.mzXML
+Enter the number of rows for a single replicate acquisition (integer): 11
+Enter the number of columns for a single replicate acquisition (integer): 11
+Enter the number of replicates on the plate for a single acquisition(integer): 
+ ````
+ 
   **Ion intensity maps**
 
  _m/z_ 209.04 <br>
