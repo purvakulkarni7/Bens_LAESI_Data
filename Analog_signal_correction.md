@@ -23,15 +23,17 @@ y = 0.0092x - 0.0047
  _m/z_ 273.08 <br>
  _m/z_ 409.22 <br>
  
+ ---
+ 
 **2.  180418_POS_Cotton_Leaf_1**
 
   - [File](LAESI-MSI-Scripts-B_Bartels.et.al/180418_POS_Cotton_Leaf_1/Analog_List.txt) raw analog signal
-  - [File](LAESI-MSI-Scripts-B_Bartels.et.al/180418_POS_Cotton_Leaf_1/Corrected_Analog_List.txt) containing corrected analog signal
+  - File containing corrected analog signal
   - [File](LAESI-MSI-Scripts-B_Bartels.et.al/180418_POS_Cotton_Leaf_1/TIC_List.txt) containing TIC signal extracted based on the corrected analog signal
-  - mzXML file generated from the Waters .RAW file
-  - nRow = 11, nCol = 11
+   - mzXML file generated from the Waters .RAW file
+   - nRow = 11, nCol = 11
    
-     **Ion intensity maps**
+ **Ion intensity maps**
 
  _m/z_ 147.06 <br>
  _m/z_ 275.13 <br>
