@@ -29,7 +29,7 @@ Enter path for TIC data file (*.txt): P:\Personal\Personal_Scientific\Ben_LAESI_
 Enter path for mzXML data file (*.mzXML): P:\Personal\Personal_Scientific\Ben_LAESI_Data_4_June_2018\180418_NEG_Cotton_Leaf_1\180418_NEG_Cotton_Leaf_1.mzXML
 Enter the number of rows for a single replicate acquisition (integer): 11
 Enter the number of columns for a single replicate acquisition (integer): 11
-Enter the number of replicates on the plate for a single acquisition(integer): 
+Enter the number of replicates on the plate for a single acquisition(integer): 1
  ````
  
   **Ion intensity maps**
