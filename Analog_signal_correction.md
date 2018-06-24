@@ -35,18 +35,18 @@ Enter the number of replicates on the plate for a single acquisition(integer):
 ````
 mz209_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 209.04, tolerance = 0.1, colRamp=viridis_col)
 ````
-![](LAESI-MSI-Scripts-B_Bartels.et.al/Ion_maps/209_04_NEG.png)
+![](/Ion_maps/209_04_NEG.png)
 
  **_m/z_ 273.08**
 ````
 mz273_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 273.08, tolerance = 0.1, colRamp=viridis_col)
 ````
-![](LAESI-MSI-Scripts-B_Bartels.et.al/Ion_maps/273_08_NEG.png)
+![](/Ion_maps/273_08_NEG.png)
 **_m/z_ 409.22**
 ````
 mz409_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 409.22, tolerance = 0.1, colRamp=viridis_col)
 ````
- ![](LAESI-MSI-Scripts-B_Bartels.et.al/Ion_maps/409_22_NEG.png)
+ ![](/Ion_maps/409_22_NEG.png)
  ---
  
 **2.  180418_POS_Cotton_Leaf_1**
@@ -75,14 +75,17 @@ Enter the number of replicates on the plate for a single acquisition(integer): 1
 ````
 mz147_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 147.06, tolerance = 0.1, colRamp=viridis_col)
 ````
+ ![](/Ion_maps/147_06_POS.png)
 **_m/z_ 275.13**
 ````
 mz275_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 275.13, tolerance = 0.1, colRamp=viridis_col)
 ````
+ ![](/Ion_maps/275_13_POS.png)
  **_m/z_ 411.24**
  ````
 mz411_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 411.24, tolerance = 0.1, colRamp=viridis_col)
 ````
+ ![](/Ion_maps/411_24_POS.png)
 
  **Note:**
  
