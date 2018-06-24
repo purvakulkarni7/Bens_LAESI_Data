@@ -7,6 +7,9 @@ Deatils related to the function and its calulation can be found in this file: [1
 ````
 y = 0.0092x - 0.0047
 ````
+
+[Link](/R_scripts_analog_signal_correction/) to R scripts for analog signal correction and generation of imzML file
+
 ## Datasets used to test the analog time correction function ##
 
  **1.  180418_NEG_Cotton_Leaf_1**
