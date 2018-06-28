@@ -1,6 +1,6 @@
 # Analog time correction #
 
-Dataset used to generate time-shift correction function: 180607_POS_LeuEnk_timeshift_3.raw <br>
+Dataset used to generate time-shift correction function: 180607_POS_LeuEnk_timeshift_3.raw (_m/z_ 556.28) <br>
 Deatils related to the function and its calulation can be found in this file: [180607_LeuEnk_Timeshift_offset.xls](LAESI-MSI-Scripts-B_Bartels.et.al/180607_LeuEnk_Timeshift_offset.xls)
 
 **Analog time correction function:** 
