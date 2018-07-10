@@ -42,6 +42,12 @@ mz209_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 209.04, tolerance = 0.1, c
 Ion map from Cardinal (Continuous imzML file)
 ![](/Ion_maps/209_045_NEG_Continuos_Cardinal.png)
 
+Ion map transposed (Processed imzML file, plotIMSSlice.R script)
+````
+plotIMSSlice(Cotton_Leaf_NEG, c(208.94, 209.14), main = "")
+````
+![](/Ion_maps/209_04_NEG_Processed_Transposed.png)
+
  **_m/z_ 273.08**
 ````
 mz273_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 273.08, tolerance = 0.1, colRamp=viridis_col)
@@ -49,6 +55,11 @@ mz273_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 273.08, tolerance = 0.1, c
 ![](/Ion_maps/273_08_NEG.png)
 Ion map from Cardinal (Continuous imzML file)
 ![](/Ion_maps/273_085_NEG_Continuos_Cardinal.png)
+Ion map transposed (Processed imzML file, plotIMSSlice.R script)
+````
+plotIMSSlice(Cotton_Leaf_NEG, c(272.98, 273.18), main = "")
+````
+![](/Ion_maps/273_08_NEG_Processed_Transposed.png)
 **_m/z_ 409.22**
 ````
 mz409_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 409.22, tolerance = 0.1, colRamp=viridis_col)
@@ -56,6 +67,11 @@ mz409_NEG <- plotMsiSlice(NEG_Cotton_Leaf_1, center = 409.22, tolerance = 0.1, c
  ![](/Ion_maps/409_22_NEG.png)
  Ion map from Cardinal (Continuous imzML file)
  ![](/Ion_maps/409_21_NEG_Continuos_Cardinal.png)
+ Ion map transposed (Processed imzML file, plotIMSSlice.R script)
+````
+plotIMSSlice(Cotton_Leaf_NEG, c(409.12, 409.32), main = "")
+````
+![](/Ion_maps/409_22_NEG_Processed_Transposed.png)
  ---
  
 **2.  180418_POS_Cotton_Leaf_1**
@@ -87,6 +103,11 @@ mz147_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 147.06, tolerance = 0.1, c
  ![](/Ion_maps/147_06_POS.png)
  Ion map from Cardinal (Continuous imzML file)
  ![](/Ion_maps/147_06_POS_Continuos_Cardinal.png)
+  Ion map transposed (Processed imzML file, plotIMSSlice.R script)
+````
+plotIMSSlice(Cotton_Leaf_POS, c(146.96, 147.16), main = "")
+````
+![](/Ion_maps/147_06_POS_Processed_Transposed.png)
 **_m/z_ 275.13**
 ````
 mz275_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 275.13, tolerance = 0.1, colRamp=viridis_col)
@@ -94,6 +115,11 @@ mz275_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 275.13, tolerance = 0.1, c
  ![](/Ion_maps/275_13_POS.png)
  Ion map from Cardinal (Continuous imzML file)
  ![](/Ion_maps/275_13_POS_Continuos_Cardinal.png)
+   Ion map transposed (Processed imzML file, plotIMSSlice.R script)
+````
+plotIMSSlice(Cotton_Leaf_POS, c(275.03, 275.23), main = "")
+````
+![](/Ion_maps/275_13_POS_Processed_Transposed.png)
  **_m/z_ 411.24**
  ````
 mz411_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 411.24, tolerance = 0.1, colRamp=viridis_col)
@@ -101,7 +127,11 @@ mz411_POS <- plotMsiSlice(POS_Cotton_Leaf_1, center = 411.24, tolerance = 0.1, c
  ![](/Ion_maps/411_24_POS.png)
  Ion map from Cardinal (Continuous imzML file)
  ![](/Ion_maps/411_24_POS_Continuos_Cardinal.png)
-
+Ion map transposed (Processed imzML file, plotIMSSlice.R script)
+````
+plotIMSSlice(Cotton_Leaf_POS, c(411.14, 411.34), main = "")
+````
+![](/Ion_maps/411_24_POS_Processed_Transposed.png)
  **Note:**
  
  Code to get the viridis color scale
